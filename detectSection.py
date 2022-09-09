@@ -19,6 +19,7 @@ def detect_point(event, x, y, flags, params):
         cv2.imshow("imgOutput", output)
     cv2.imshow('img', img)
 
+# 점을 찍을때 왼쪽 아래, 오른쪽 아래, 왼쪽 위, 오른쪽 위 순서로
 img = cv2.imread('./static/tile.jpg')
 cv2.imshow('img', img)
 cv2.setMouseCallback('img', detect_point)
