@@ -32,13 +32,13 @@ def connectPoints():
     elif COLLECTED_POINTS.__len__() == 2:
         POINT1 = COLLECTED_POINTS[0]
         POINT2 = COLLECTED_POINTS[1]
+        cv2.line(img, POINT1, POINT2, DETECT_LINE_COLOR, 3)
     else:
         INDEX_OF_POINT_TO_CONNECT = getDistance().astype(int)
         print("index", INDEX_OF_POINT_TO_CONNECT)
         POINT1 = COLLECTED_POINTS[INDEX_OF_POINT_TO_CONNECT[0]]
         POINT2 = COLLECTED_POINTS[INDEX_OF_POINT_TO_CONNECT[1]]
-
-    connectTwoPoints()
+        connectTwoPoints()
 
 def connectTwoPoints(originPoint, point1, point2):
     cv2.line(img, originPoint, point1, DETECT_LINE_COLOR, 3)
@@ -47,6 +47,9 @@ def connectTwoPoints(originPoint, point1, point2):
     cv2.line(mask_template, originPoint, point2, DETECT_LINE_COLOR, 3)
     cv2.imshow("mask image", mask_template)
 
+## 새로 들어오는 점과 기존에 있던 점들과의 거리만 계산해서
+## 가장 짧은 거리 두개를 그으면 될 줄 알았는데
+## 기존의 선들도 새로 그어야한다...새로운 계산법이 필요할 것 같다
 def getDistance():
     POINT_DISTANCE = np.zeros((COLLECTED_POINTS.__len__(), 2))
     for idx, point in enumerate(COLLECTED_POINTS):
